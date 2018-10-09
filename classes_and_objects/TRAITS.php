@@ -51,5 +51,5 @@ class Box implements ISayYourClass
 $man = new Man();
 $box = new Box();
 
-echo $man->sayYourClass(); // My class is Man
-echo $box->sayYourClass(); // My class is Box
+//echo $man->sayYourClass(); // My class is Man
+//echo $box->sayYourClass(); // My class is Box
