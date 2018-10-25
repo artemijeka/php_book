@@ -8,40 +8,50 @@
 
 namespace MVCExample\Controllers;
 
+use \MVCExample\Models\Article;
+use \MVCExample\Services\Db;
 use \MVCExample\Views\View;
 
 class MainController
 {
+    /** @var View */
     private $view;
+
+    /** @var Db */
+    private $db;
 
     public function __construct()
     {
         /**
          * Чтобы не писать include __DIR__ . '/../../../templates/main/main.php';
-         * В front controller (index.php) мы подключили config.php(в корневой дирректории),
-         * в котором BASE = __DIR__ то есть корню веб прилодения.
          */
         $this->view = new View(__DIR__ . '/../../../templates/');
+        /**
+         * Cоздаем подключение к базе данных при вызове главного контроллера.
+         */
+        $this->db = new Db();
     }
 
+    /**
+     * Получаем статьи с помощью pdo из БД.
+     */
     public function main()
     {
-        $articles = [
-            ['name' => 'Статья 1', 'text' => 'Текст статьи 1'],
-            ['name' => 'Статья 2', 'text' => 'Текст статьи 2'],
-        ];
+        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
         $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
 
     public function sayHello(string $name)
     {
-        echo 'Привет, ' . $name;
-        $this->view->renderHtml('main/hello.php', ['name' => $name]);
+        $this->view->renderHtml('main/hello.php', ['name' => $name, 'title' => 'Страница приветствия']);
     }
 
     public function sayBye(string $name)
     {
-        echo 'Пока, ' . $name;
+        /**
+         * title не передан и по этому отрабатывает "<?=$title ?? 'Мой блог'?>" в header.php
+         */
+        $this->view->renderHtml('main/bye.php', ['name' => $name]);
     }
 }
 /**

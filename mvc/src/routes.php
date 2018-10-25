@@ -12,9 +12,10 @@
  */
 return [
     /**
-     * Обязательно сообщаем, что у нас MainController является (статическим) классом с помощью ::class
+     * Обязательно сообщаем, что MainController является (статическим) классом с помощью ::class
      */
     '~^hello/(.*)$~' => [\MVCExample\Controllers\MainController::class, 'sayHello'],
+    '~^articles/(\d+)$~' => [\MVCExample\Controllers\ArticlesController::class, 'view'],
     '~^bye/(.*)$~' => [\MVCExample\Controllers\MainController::class, 'sayBye'],
     '~^$~' => [\MVCExample\Controllers\MainController::class, 'main']
 ];

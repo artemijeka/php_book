@@ -7,6 +7,9 @@
  */
 
 /**
- * Данный config.php обязательно лежит в самом корне веб-приложения.
+ * Данный config.php должен находиться в корне веб-приложения.
  */
-//const BASE = __DIR__;
+//const BASE_STYLE_DIR = __DIR__.'/www/css/';
+const DB_DRIVER = 'mysql'; // http://php.net/manual/ru/pdo.drivers.php
+const DB_NAME = 'mvc';
+const DB_PASS = 'admin';
