@@ -10,6 +10,7 @@ namespace MVCExample\Controllers;
 
 use \MVCExample\Services\Db;
 use \MVCExample\Views\View;
+use \MVCExample\Models\Article;
 
 class ArticlesController
 {
@@ -29,7 +30,8 @@ class ArticlesController
     {
         $result = $this->db->query(
             'SELECT * FROM `articles` WHERE id = :id;',
-            [':id' => $articleId]
+            [':id' => $articleId],
+            Article::class
         );
 
         /**
