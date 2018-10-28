@@ -8,8 +8,8 @@
 
 namespace MVCExample\Controllers;
 
-use \MVCExample\Models\Article;
 use \MVCExample\Services\Db;
+use \MVCExample\Models\Article;
 use \MVCExample\Views\View;
 
 class MainController
@@ -37,7 +37,7 @@ class MainController
      */
     public function main()
     {
-        $articles = $this->db->query('SELECT * FROM `articles`;', [], Article::class);
+        $articles = Article::findAll();
         $this->view->renderHtml('main/main.php', ['articles' => $articles]);
     }
 
