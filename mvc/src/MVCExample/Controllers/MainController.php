@@ -8,7 +8,6 @@
 
 namespace MVCExample\Controllers;
 
-use \MVCExample\Services\Db;
 use \MVCExample\Models\Article;
 use \MVCExample\Views\View;
 
@@ -17,19 +16,12 @@ class MainController
     /** @var View */
     private $view;
 
-    /** @var Db */
-    private $db;
-
     public function __construct()
     {
         /**
          * Чтобы не писать include __DIR__ . '/../../../templates/main/main.php';
          */
         $this->view = new View(__DIR__ . '/../../../templates/');
-        /**
-         * Cоздаем подключение к базе данных при вызове главного контроллера.
-         */
-        $this->db = new Db();
     }
 
     /**
