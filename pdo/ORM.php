@@ -4,7 +4,7 @@
  * User: artem
  * Date: 10/25/18
  * Time: 11:19 AM
- * Source: https://webshake.ru/oop-v-php-prodvinutyj-kurs/18
+ * Link: https://webshake.ru/oop-v-php-prodvinutyj-kurs/18
  */
 /****************************************** ORM - Object Relational Mapping ******************************************/
 /**
