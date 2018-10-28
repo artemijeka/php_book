@@ -37,11 +37,8 @@ class ArticlesController
         /**
          * Добавляем получение нужного юзера:
          */
-        $articleAuthor = User::getById($article->getAuthorId());
-
         $this->view->renderHtml('articles/view.php', [
-            'article' => $article,
-            'author' => $articleAuthor
+            'article' => $article
         ]);
 
         /**

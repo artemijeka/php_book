@@ -14,6 +14,8 @@ namespace MVCExample\Models;
  */
 use \MVCExample\Models\ActiveRecordEntity;
 
+use \MVCExample\Models\User;
+
 class Article extends ActiveRecordEntity
 {
     /** @var string */
@@ -45,11 +47,13 @@ class Article extends ActiveRecordEntity
     }
 
     /**
-     * @return int
+     * @return User
+     * Прямо в геттере просим сущность юзера выполнить запрос в базу и получить нужного пользователя, по id,
+     * который хранится в статье. При этом запрос будет выполнен только если мы вызовем этот геттер.
      */
-    public function getAuthorId(): int
+    public function getAuthor(): User
     {
-        return (int) $this->authorId;
+        return User::getById($this->authorId);
     }
 
     /**
