@@ -84,7 +84,7 @@ abstract class ActiveRecordEntity
      */
     public static function findAll(): array
     {
-        $db = new Db();
+        $db = Db::getInstance();
         /**
          * Можно заменить Article::class на self::class – и сюда автоматически подставится класс, в котором этот метод
          * определен. А можно заменить его и вовсе на static::class – тогда будет подставлено имя класса,
@@ -98,19 +98,13 @@ abstract class ActiveRecordEntity
     }
 
     /**
-     * @return string
-     * Абстрактный метод у каждой сущности своя таблица в БД.
-     */
-    abstract protected static function getTableName(): string;
-
-    /**
      * @param int $id
      * @return static|null
      * Этот метод вернёт либо один объект, если он найдётся в базе, либо null – что будет говорить об его отсутствии.
      */
     public static function getById(int $id): ?self
     {
-        $db = new Db();
+        $db = Db::getInstance();
         $entities = $db->query(
             'SELECT * FROM `' . static::getTableName() . '` WHERE id=:id;',
             [':id' => $id],
@@ -118,4 +112,10 @@ abstract class ActiveRecordEntity
         );
         return $entities ? $entities[0] : null;
     }
+
+    /**
+     * @return string
+     * Абстрактный метод у каждой сущности своя таблица в БД.
+     */
+    abstract protected static function getTableName(): string;
 }

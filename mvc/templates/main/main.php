@@ -7,6 +7,7 @@
   -->
 	<h2><a href="/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a></h2>
 	<p><?= $article->getText() ?></p>
+	<p><?= $article->getAuthor()->getNickname() ?></p>
 	<hr>
 <?php endforeach; ?>
 <?php include __DIR__ . '/../footer.php'; ?>

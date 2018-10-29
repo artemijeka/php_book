@@ -8,15 +8,23 @@
 
 namespace MVCExample\Services;
 
-
+/****************************************************** SINGLEON *******************************************************
+ * Singleton (синглтон). Этот паттерн говорит о том, что в рамках одного запущенного приложения будет гарантироваться
+ * что будет использован только один объект какого-то класса. Классы, реализующие паттерн синглтон сами гарантируют,
+ * что будет использоваться только один их экземпляр – создать объекты можно только с помощью специального метода,
+ * ведь конструктор больше недоступен извне. А этот метод следит за тем, чтобы не было более одного созданного объекта
+ * и предоставляет единую точку доступа к этому экземпляру. Вот и вся суть паттерна Singleton.
+ */
 class Db
 {
+    private static $instance;
+
     /** @var \PDO */
     private $pdo;
 
-    public function __construct()
+    private function __construct()
     {
-        $dbOptions = (require __DIR__ . '/../../settings.php')['db']; // src/settings.php
+        $dbOptions = (require __DIR__ . '/../../settings.php')['db'];
 
         $this->pdo = new \PDO(
             DB_DRIVER . ':host=' . $dbOptions['host'] . ';dbname=' . $dbOptions['dbname'],
@@ -24,6 +32,18 @@ class Db
             $dbOptions['password']
         );
         $this->pdo->exec('SET NAMES UTF8');
+    }
+
+    /**
+     * Метод паттерна SINGLETON который обращается к private __constract и следит, чтобы был всего один экземпляр
+     * данного обращения (в нашем случае одно обращение к БД)
+     */
+    public static function getInstance() :self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     /**

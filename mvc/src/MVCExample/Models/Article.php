@@ -13,7 +13,6 @@ namespace MVCExample\Models;
  * а protected, чтобы к ним можно было достучаться из класса-родителя.
  */
 use \MVCExample\Models\ActiveRecordEntity;
-
 use \MVCExample\Models\User;
 
 class Article extends ActiveRecordEntity

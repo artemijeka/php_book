@@ -9,7 +9,6 @@
 namespace MVCExample\Controllers;
 
 use \MVCExample\Models\Article;
-use \MVCExample\Models\User;
 use \MVCExample\Views\View;
 
 class ArticlesController
@@ -40,7 +39,6 @@ class ArticlesController
         $this->view->renderHtml('articles/view.php', [
             'article' => $article
         ]);
-
         /**
          * После передачи в renderHtml происходит разбор этого массива
          * на переменные и значения с помощью extract($vars);
