@@ -25,6 +25,18 @@ class ArticlesController
     {
         $article = Article::getById($articleId);
 
+        /********************************** PHP Reflection API ***********************************
+         *
+         */
+        $reflector = new \ReflectionObject($article);
+        $properties = $reflector->getProperties();
+        $propertiesNames = [];
+        foreach ($properties as $property) {
+            $propertiesNames[] = $property->getName();
+        }
+        var_dump($propertiesNames);
+        return;
+
         /**
          * Если $article пустой то страницу ошибки выводим.
          */

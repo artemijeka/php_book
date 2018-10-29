@@ -35,18 +35,6 @@ class Db
     }
 
     /**
-     * Метод паттерна SINGLETON который обращается к private __constract и следит, чтобы был всего один экземпляр
-     * данного обращения (в нашем случае одно обращение к БД)
-     */
-    public static function getInstance() :self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
-
-    /**
      *  Давайте напишем отдельный метод для выполнения запросов в базу.
      *
      * Третьим аргументом в этот метод будет передаваться имя класса, объекты которого нужно создавать.
@@ -68,5 +56,17 @@ class Db
          * которое мы можем передать в метод query().
          */
         return $sth->fetchAll(\PDO::FETCH_CLASS, $className);
+    }
+
+    /**
+     * Метод паттерна SINGLETON который обращается к private __constract и следит, чтобы был всего один экземпляр
+     * данного обращения (в нашем случае одно обращение к БД)
+     */
+    public static function getInstance() :self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 }
